@@ -10,6 +10,7 @@ class BinarySearchTree(object):
   def __init__(self):
     self.root = None
 
+
   def insert(self, data):
     if not self.root:
       self.root = Node(data)
@@ -29,3 +30,39 @@ class BinarySearchTree(object):
         self.insertNode(data, node.rightChild)
       else:
         node.rightChild = Node(data)
+
+
+  def getMinValue(self):
+    if self.root: # if root not None
+      return self.getMin(self.root)
+
+  def getMin(self, node):
+    if node.leftChild: # have left Child
+      getMin(node.leftChild)
+
+    return node.data
+
+
+  def getMaxValue(self):
+    if self.root:
+      return self.getMax(self.root)
+
+  def getMax(self, node):
+    if node.rightChild:
+      getMax(node.rightChild)
+
+    return node.data
+
+
+  def traverse(self):
+    if self.root:
+      self.traverseInOrder(self, self.root)
+
+  def traverseInOrder(self, node):
+    if node.leftChild:
+      self.traverseInOrder(node.leftChild)
+
+    print('%s ' % node.data)
+
+    if node.rightChild:
+      self.traverseInOrder(node.rightChild)
