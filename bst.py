@@ -38,9 +38,9 @@ class BinarySearchTree(object):
 
   def getMin(self, node):
     if node.leftChild: # have left Child
-      getMin(node.leftChild)
+      return self.getMin(node.leftChild)
 
-    return node.data
+    return node.data # if leftChild None => return data
 
 
   def getMaxValue(self):
@@ -49,20 +49,39 @@ class BinarySearchTree(object):
 
   def getMax(self, node):
     if node.rightChild:
-      getMax(node.rightChild)
+      return self.getMax(node.rightChild)
 
-    return node.data
+    return node.data # id rightChil`d None => return data
 
 
   def traverse(self):
     if self.root:
-      self.traverseInOrder(self, self.root)
+      self.traverseInOrder(self.root)
 
-  def traverseInOrder(self, node):
+  def traverseInOrder(self, node): # выводим по возрастанию
+    # идем в самую левую и глубокую часть дереве и потом рекурсией
+    # начинаем подниматься по дереву обратно
     if node.leftChild:
       self.traverseInOrder(node.leftChild)
 
-    print('%s ' % node.data)
+    print('%s ' % node.data) # выводим корень, у которого нет левого ребенка
 
     if node.rightChild:
       self.traverseInOrder(node.rightChild)
+
+bst = BinarySearchTree()
+bst.insert(10)
+bst.insert(5)
+bst.insert(15.5)
+bst.insert(6)
+
+print(' MIN = %s ' % bst.getMinValue())
+print(' MAX = %f ' % bst.getMaxValue())
+bst.traverse()
+
+bst2 = BinarySearchTree() # we can pass not only numbers =)
+bst2.insert('C')
+bst2.insert('B')
+bst2.insert('G')
+bst2.insert('Z')
+bst2.traverse()
