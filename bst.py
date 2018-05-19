@@ -11,6 +11,7 @@ class BinarySearchTree(object):
     self.root = None
 
 
+  # O(logN) or O(N)
   def insert(self, data):
     if not self.root:
       self.root = Node(data)
@@ -32,12 +33,13 @@ class BinarySearchTree(object):
         node.rightChild = Node(data)
 
 
+    # O(logN)
   def remove(self, data):
     if self.root:
       self.root = self.removeNode(data, self.root)
   ###
   def removeNode(self, data, node):
-    if not node: # if node None ??? разве обязательно нужно ???
+    if node == None: # if node None ??? разве обязательно нужно ???
       return node # нужно для установки у родителя None
 
     if data < node.data: # в левом поддереве ищем
@@ -69,6 +71,8 @@ class BinarySearchTree(object):
       print('minNode %s ' % minNode.data)
       node.data = minNode.data # меняю значения на MIN в правом
       node.rightChild = self.removeNode(minNode.data, node.rightChild) # удаляю в правом MIN значение
+
+    return node
   ###
   def getMinNode(self, node): # находим MIN node в дереве
     if node.leftChild:
@@ -77,6 +81,7 @@ class BinarySearchTree(object):
     return node
 
 
+  # O(logN)
   def getMinValue(self):
     if self.root: # if root not None
       return self.getMin(self.root)
@@ -88,6 +93,7 @@ class BinarySearchTree(object):
     return node.data # if leftChild None => return data
 
 
+  # O(logN)
   def getMaxValue(self):
     if self.root:
       return self.getMax(self.root)
@@ -99,7 +105,9 @@ class BinarySearchTree(object):
     return node.data # id rightChil`d None => return data
 
 
+  # O(N)
   def traverse(self):
+    print('traverse %s ' % self.root.data)
     if self.root:
       self.traverseInOrder(self.root)
   ###
